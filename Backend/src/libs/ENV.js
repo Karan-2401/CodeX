@@ -1,8 +1,10 @@
-const dotenv = require('dotenv')
-
-dotenv.config()
+const dotenv = require('dotenv');
+dotenv.config();
 
 const ENV = {
-    Port : process.env.PORT,
-    DatabaseURL : process.env.Database_URL
-}
+  PORT: process.env.PORT,
+  DATABASE_URL: process.env.DATABASE_URL,
+  NODE: process.env.NODE_ENV,
+};
+
+module.exports = ENV; 
