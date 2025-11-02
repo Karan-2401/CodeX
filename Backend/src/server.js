@@ -2,12 +2,17 @@ const express = require('express');
 const ENV = require('./libs/ENV');
 const path = require('path')
 const app = express();
+const databaseConnection = require('./libs/db-connection')
+
+// database connection
+databaseConnection()
+// database connection
+
+
+
+
 
 const dirname = path.resolve()
-
-app.get('/d',(req,res)=>{
-    res.status(200).json({msg:"hello"})
-})
 
 // make our app ready for deployment
 if(ENV.NODE == 'production'){
