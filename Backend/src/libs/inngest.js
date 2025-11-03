@@ -1,4 +1,4 @@
-const Inngest = require('inngest');
+const {Inngest} = require('inngest');
 const databaseConnection = require('./db-connection')
 const User = require('../models/User')
 
