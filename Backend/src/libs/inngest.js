@@ -2,7 +2,7 @@ const {Inngest} = require('inngest');
 const databaseConnection = require('./db-connection')
 const User = require('../models/User')
 
-const inngest = new Inngest({ id: "CodeX" });
+const inngest = new Inngest({ id: "codex" });
 const syncUser = inngest.createFunction({
     id:"sync-user"
 },
