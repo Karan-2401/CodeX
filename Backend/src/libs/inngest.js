@@ -31,4 +31,7 @@ async ({event})=>{
     await User.deleteOne({clerkId:id})
 })
 
-module.exports = syncUser, inngest, DeleteUser
+module.exports = {
+  inngest,
+  functions: [syncUser, DeleteUser],
+};

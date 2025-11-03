@@ -4,7 +4,7 @@ const path = require('path')
 const app = express();
 const databaseConnection = require('./libs/db-connection')
 const cors = require('cors')
-const serve = require('inngest/express')
+const {serve} = require('inngest/express')
 const {inngest, functions} = require('./libs/inngest')
 
 // database connection
