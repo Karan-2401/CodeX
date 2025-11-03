@@ -3,13 +3,15 @@ const ENV = require('./libs/ENV');
 const path = require('path')
 const app = express();
 const databaseConnection = require('./libs/db-connection')
+const cors = require('cors')
+const serve = require('inngest/express')
 
 // database connection
 databaseConnection()
 // database connection
-
-
-
+app.use(cors({origin:ENV.CLIENT_URL,credentials:true}))
+app.use("/api/inngest",serve({client:inngest, function }))
+app.use(express.json())
 
 
 const dirname = path.resolve()
