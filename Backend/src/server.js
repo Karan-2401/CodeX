@@ -5,12 +5,13 @@ const app = express();
 const databaseConnection = require('./libs/db-connection')
 const cors = require('cors')
 const serve = require('inngest/express')
+const {inngest, functions} = require('./libs/inngest')
 
 // database connection
 databaseConnection()
 // database connection
 app.use(cors({origin:ENV.CLIENT_URL,credentials:true}))
-app.use("/api/inngest",serve({client:inngest, function }))
+app.use("/api/inngest",serve({client:inngest, functions }))
 app.use(express.json())
 
 
