@@ -28,4 +28,4 @@ const deleteStreamUser = async(userId)=>{
     }
 }
 
-module.exports = {chatClient, upsertStreamUser}
+module.exports = {chatClient, upsertStreamUser, deleteStreamUser}

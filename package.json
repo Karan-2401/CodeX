@@ -12,6 +12,7 @@
   "description": "",
   "dependencies": {
     "express": "^5.1.0",
-    "inngest": "^3.44.4"
+    "inngest": "^3.44.4",
+    "stream-chat": "^9.25.0"
   }
 }
