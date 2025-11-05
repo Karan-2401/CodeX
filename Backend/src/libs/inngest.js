@@ -1,6 +1,7 @@
 const {Inngest} = require('inngest');
 const databaseConnection = require('./db-connection')
-const User = require('../models/User')
+const User = require('../models/User');
+const { upsertStreamUser, deleteStreamUser } = require('./stream');
 
 const inngest = new Inngest({ id: "codex" });
 const syncUser = inngest.createFunction({
@@ -17,6 +18,11 @@ async ({event})=>{
         profileImage : image_url,
     }
     await User.create(newUser)
+    await upsertStreamUser({
+        id: newUser.clerkId.toString(),
+        name:newUser.name,
+        image:newUser.profileImage
+    })
 })
 
 
@@ -29,6 +35,7 @@ async ({event})=>{
     const {id} = event.data
     
     await User.deleteOne({clerkId:id})
+    await deleteStreamUser(id.toString())
 })
 
 module.exports = {
