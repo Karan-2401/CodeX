@@ -1,17 +1,30 @@
-import { useState } from 'react'
-import './App.css'
-import { SignInButton } from '@clerk/clerk-react'
+import { useState } from "react";
+import "./App.css";
+import {
+  SignedOut,
+  SignedIn,
+  SignInButton,
+  SignOutButton,
+  UserButton,
+} from "@clerk/clerk-react";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
     <>
-    <h1>Hi Karan</h1>
-      <SignInButton mode='modal'/> 
-      
+      <h1>Hi Karan</h1>
+      <SignedOut>
+        <SignInButton mode="modal" />
+      </SignedOut>
+
+      <SignedIn>
+        <SignOutButton />
+      </SignedIn>
+
+      <UserButton />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
