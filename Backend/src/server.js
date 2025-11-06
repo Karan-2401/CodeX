@@ -6,13 +6,20 @@ const databaseConnection = require('./libs/db-connection')
 const cors = require('cors')
 const {serve} = require('inngest/express')
 const {inngest, functions} = require('./libs/inngest')
+const {clerkMiddleware}= require('@clerk/express')
+const protectRoute = require('./middleware/protectRoute')
+const chatRoute = require('./routing/chatRoute')
+
 
 // database connection
 databaseConnection()
 // database connection
 app.use(express.json())
 app.use(cors({origin:ENV.CLIENT_URL,credentials:true}))
+app.use(clerkMiddleware())
 app.use("/api/inngest",serve({client:inngest, functions }))
+
+app.use("/api/chat",chatRoute)
 
 const dirname = path.resolve()
 
