@@ -1,5 +1,7 @@
 const { StreamChat } = require('stream-chat');  // Import the StreamChat SDK
+const {StreamClient} = require("@stream-io/node-sdk")
 const env = require('./ENV');
+
 
 // Load API Key and Secret from environment variables
 const apiKey = env.STREAM_API_KEY;
@@ -10,8 +12,9 @@ if (!apiKey || !apiSecret) {
     process.exit(1);  // Exit if API key/secret is missing
 }
 
-// Use StreamChat.getInstance() to initialize the client with both API key and secret
-const chatClient = StreamChat.getInstance(apiKey, apiSecret);  // Correct for v9+ SDK
+const streamClient = new StreamClient(apiKey,apiSecret)
+
+const chatClient = StreamChat.getInstance(apiKey, apiSecret);  
 
 const upsertStreamUser = async (userData) => {
     try {
@@ -33,4 +36,4 @@ const deleteStreamUser = async (userId) => {
     }
 };
 
-module.exports = { chatClient, upsertStreamUser, deleteStreamUser };
+module.exports = { chatClient, upsertStreamUser, deleteStreamUser,streamClient };

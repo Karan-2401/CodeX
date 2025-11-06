@@ -9,6 +9,7 @@ const {inngest, functions} = require('./libs/inngest')
 const {clerkMiddleware}= require('@clerk/express')
 const protectRoute = require('./middleware/protectRoute')
 const chatRoute = require('./routing/chatRoute')
+const sessionRoute = require('./routing/sessionRoute')
 
 
 // database connection
@@ -20,6 +21,7 @@ app.use(clerkMiddleware())
 app.use("/api/inngest",serve({client:inngest, functions }))
 
 app.use("/api/chat",chatRoute)
+app.use("/api/session",sessionRoute)
 
 const dirname = path.resolve()
 
