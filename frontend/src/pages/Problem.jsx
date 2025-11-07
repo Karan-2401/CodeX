@@ -2,7 +2,11 @@ import React from 'react'
 
 const Problem = () => {
   return (
-    <div>Problem</div>
+   <>
+   <div className='min-h-screen bg-base-200'>
+    <Navbar/> 
+   </div>
+   </>
   )
 }
 
