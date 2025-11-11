@@ -19,18 +19,18 @@ app.use(express.json())
 app.use(cors({origin:ENV.CLIENT_URL,credentials:true}))
 app.use(clerkMiddleware())
 app.use("/api/inngest",serve({client:inngest, functions }))
-
+app.get('/')
 app.use("/api/chat",chatRoute)
-app.use("/api/session",sessionRoute)
+app.use("/api/sessions",sessionRoute)
 
 const dirname = path.resolve()
 
 // make our app ready for deployment
-if(ENV.NODE == 'production'){
-    app.use(express.static(path.join(__dirname,"../../frontend/dist")))
-    app.get("/{*any}",(req,res)=>{
-        res.sendFile(path.join(__dirname,"../../frontend","dist","index.html"))
-    })
-}
+// if(ENV.NODE == 'production'){
+//     app.use(express.static(path.join(__dirname,"../../frontend/dist")))
+//     app.get("/{*any}",(req,res)=>{
+//         res.sendFile(path.join(__dirname,"../../frontend","dist","index.html"))
+//     })
+// }
 
-app.listen(ENV.PORT,()=>{console.log('run run bhago 3001')})
+app.listen(ENV.PORT,()=>{console.log('run run bhago'+ENV.PORT)})

@@ -1,6 +1,5 @@
 const Session = require("../models/Session");
-const StreamClient = require("../libs/stream");
-const chatClient = require("../libs/stream");
+const {chatClient, streamClient} = require('../libs/stream')
 async function createSession(req, res) {
   try {
     const { problem, difficulty } = req.body;
@@ -21,14 +20,15 @@ async function createSession(req, res) {
       host: userId,
       callId,
     });
-    await StreamClient.video.call("default", callId).getOrCreate({
+    const call = streamClient.video.call('default', callId);
+    await call.getOrCreate({
       data: {
         created_by_id: clerkId,
         custom: { problem, difficulty, sessionId: session._id.toString() },
       },
     });
 
-    const channel = chatClient.channel("messaging", callId, {
+    const channel = chatClient.channel('messaging', callId, {
       name: `${problem} Session`,
       created_by_id: clerkId,
       members: [clerkId],
@@ -46,6 +46,7 @@ async function getActiveSession(req, res) {
   try {
     const session = await Session.find({ status: "active" })
       .populate("host", "name profileImage")
+      .populate("participant", "name profileImage")
       .sort({ createdAt: -1 })
       .limit(20);
     res.status(200).json({ session });

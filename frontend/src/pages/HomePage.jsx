@@ -47,29 +47,29 @@ const HomePage = () => {
               <ZapIcon className="size-4" />
               Real-Time Collaboration
             </div>
-            <h1 className="text-5xl lg:text-7xl font-black leading-tight">
+            <h1 className=" text-3xl sm:text-5xl lg:text-7xl font-black leading-tight">
               <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
                 Code Toghether,
               </span>
               <br />
               <span className="">Learn Toghether</span>
             </h1>
-            <p className="text-xl text-base-content/70 leading-relaxed max-w-xl">
+            <p className="text-md sm:text-xl text-base-content/70 leading-relaxed max-w-xl">
               The ultimate platform for collaborative coding interviews and pair
               programming. Connect face-to-face, code in real-time, and ace your
               technical interviews.
             </p>
 
             <div className="flex flex-wrap gap-3">
-              <div className="badge badge-lg badge-outline">
+              <div className="badge badge-md sm:badge-lg badge-outline">
                 <CheckIcon className="size-4 text-success" />
                 Live Video Chat
               </div>
-              <div className="badge badge-lg badge-outline">
+              <div className="badge badge-md sm:badge-lg badge-outline">
                 <CheckIcon className="size-4 text-success" />
                 Code Editor
               </div>
-              <div className="badge badge-lg badge-outline">
+              <div className="badge badge-md sm:badge-lg badge-outline">
                 <CheckIcon className="size-4 text-success" />
                 multi-Language
               </div>

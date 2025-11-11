@@ -1,39 +1,48 @@
-const { StreamChat } = require('stream-chat');  // Import the StreamChat SDK
-const {StreamClient} = require("@stream-io/node-sdk")
+
+// ✅ Imports (ESM or CommonJS compatible)
+const { StreamClient } = require('@stream-io/node-sdk');
+const { StreamChat } = require('stream-chat');
 const env = require('./ENV');
 
-
-// Load API Key and Secret from environment variables
+// ✅ Load API credentials
 const apiKey = env.STREAM_API_KEY;
 const apiSecret = env.STREAM_API_SECRET;
 
 if (!apiKey || !apiSecret) {
-    console.error('STREAM_API_KEY or STREAM_API_SECRET is missing');
-    process.exit(1);  // Exit if API key/secret is missing
+  console.error('STREAM_API_KEY or STREAM_API_SECRET is missing');
+  process.exit(1);
 }
 
-const streamClient = new StreamClient(apiKey,apiSecret)
+// ✅ Initialize Chat and Video clients (server-side)
+const chatClient = StreamChat.getInstance(apiKey, apiSecret);
+const streamClient =new StreamClient(apiKey, apiSecret);
 
-const chatClient = StreamChat.getInstance(apiKey, apiSecret);  
-
+// ✅ Function: Create or update Stream user
 const upsertStreamUser = async (userData) => {
-    try {
-        // Create or update a user
-        await chatClient.upsertUser(userData);
-        return userData;
-    } catch (error) {
-        console.error('Error upserting user:', error);
-    }
+  try {
+    await chatClient.upsertUser(userData);
+    console.log(`User upserted successfully: ${userData.id}`);
+    return userData;
+  } catch (error) {
+    console.error('Error upserting user:', error);
+    throw error;
+  }
 };
 
+// ✅ Function: Delete Stream user
 const deleteStreamUser = async (userId) => {
-    try {
-        // Delete a user
-        await chatClient.deleteUsers(userId);
-        console.log('Stream user deleted successfully:', userId);
-    } catch (error) {
-        console.error('Error deleting user:', error);
-    }
+  try {
+    await chatClient.deleteUsers([userId], { hard_delete: true });
+    console.log(`Stream user deleted successfully: ${userId}`);
+  } catch (error) {
+    console.error('Error deleting user:', error);
+    throw error;
+  }
 };
 
-module.exports = { chatClient, upsertStreamUser, deleteStreamUser,streamClient };
+module.exports = {
+  chatClient,
+  streamClient,
+  upsertStreamUser,
+  deleteStreamUser,
+};

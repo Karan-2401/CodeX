@@ -6,7 +6,7 @@ problem:{
 },
 difficulty:{
     type:String,
-    enum:["Hard","Medium","Easy"],
+    enum:["hard","medium","easy"],
     required:true
 },
 host:{
