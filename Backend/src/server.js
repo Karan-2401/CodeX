@@ -25,11 +25,11 @@ app.use("/api/sessions",sessionRoute)
 const dirname = path.resolve()
 
 // make our app ready for deployment
-// if(ENV.NODE == 'production'){
-//     app.use(express.static(path.join(__dirname,"../../frontend/dist")))
-//     app.get("/{*any}",(req,res)=>{
-//         res.sendFile(path.join(__dirname,"../../frontend","dist","index.html"))
-//     })
-// }
+if(ENV.NODE == 'production'){
+    app.use(express.static(path.join(__dirname,"../../frontend/dist")))
+    app.get("/{*any}",(req,res)=>{
+        res.sendFile(path.join(__dirname,"../../frontend","dist","index.html"))
+    })
+}
 
 app.listen(ENV.PORT,()=>{console.log('run run bhago'+ENV.PORT)})
