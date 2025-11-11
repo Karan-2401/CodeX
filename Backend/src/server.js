@@ -19,7 +19,6 @@ app.use(express.json())
 app.use(cors({origin:ENV.CLIENT_URL,credentials:true}))
 app.use(clerkMiddleware())
 app.use("/api/inngest",serve({client:inngest, functions }))
-app.get('/')
 app.use("/api/chat",chatRoute)
 app.use("/api/sessions",sessionRoute)
 
