@@ -16,7 +16,7 @@ const sessionRoute = require('./routing/sessionRoute')
 databaseConnection()
 // database connection
 app.use(express.json())
-app.use(cors({origin:ENV.CLIENT_URL,credentials:true}))
+// app.use(cors({origin:ENV.CLIENT_URL,credentials:true}))
 app.use(clerkMiddleware())
 app.use("/api/inngest",serve({client:inngest, functions }))
 app.use("/api/chat",chatRoute)
