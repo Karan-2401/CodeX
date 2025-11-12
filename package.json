@@ -1,0 +1,18 @@
+{
+  "name": "codex",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm install --prefix Backend && npm install --prefix frontend && npm run build --prefix frontend ",
+    "start": "npm run start --prefix Backend"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0",
+    "inngest": "^3.44.4",
+    "stream-chat": "^9.25.0"
+  }
+}

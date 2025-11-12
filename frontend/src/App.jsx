@@ -1,35 +1,58 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import {
+  SignedOut,
+  SignedIn,
+  SignInButton,
+  SignOutButton,
+  UserButton,
+  useUser,
+} from "@clerk/clerk-react";
+import { Route, Routes, Navigate } from "react-router";
+import HomePage from "./pages/HomePage";
+import Problem from "./pages/Problem";
+import { Toaster } from "react-hot-toast";
+import Dashboard from "./pages/Dashboard";
+import ProblemPage from "./pages/ProblemPage";
+import {SessionPage} from "./pages/SessionPage";
+import { LoaderIcon } from "lucide-react";
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [count, setCount] = useState(0);
+  const { isSignedIn } = useUser();
+  console.log(isSignedIn);
+  if (isSignedIn === undefined) {
+    return (
+      <div>
+        <div className="flex items-center justify-center py-20 h-screen">
+          <LoaderIcon className="size-10 animate-spin text-primary" />
+        </div>
+      </div>
+    );
+  }
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route
+          path="/problems"
+          element={isSignedIn ? <Problem /> : <Navigate to={"/"} />}
+        />
+        <Route
+          path="/problem/:id"
+          element={isSignedIn ? <ProblemPage /> : <Navigate to={"/"} />}
+        />
+        <Route
+          path="/dashboard"
+          element={isSignedIn ? <Dashboard /> : <Navigate to={"/"} />}
+        />
+        <Route
+          path="/session/:id"
+          element={isSignedIn ? <SessionPage /> : <Navigate to={"/"} />}
+        />
+      </Routes>
+      <Toaster />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
