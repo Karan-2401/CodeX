@@ -75,12 +75,13 @@ async function getMyRecentSession(req, res) {
 async function getSessionById(req, res) {
   try {
     const { id } = req.params;
-    const session = Session.findById(id)
+    const session = await Session.findById(id)
       .populate("host", "name email profileImage clerkId")
       .populate("participant", "name email profileImage clerkId");
 
     if (!session) res.status(404).json({ message: "Session not found" });
-    res.status(200).json({ session });
+    console.log(session)
+    res.status(200).json({ session:session });
   } catch (error) {
     console.log("error in getSessionById controler", error.message);
     res.status(500).json({ message: "Internal Server Error" });
