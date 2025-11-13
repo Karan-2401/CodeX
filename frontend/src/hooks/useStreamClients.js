@@ -5,6 +5,10 @@ import { initializeStreamClient, disconnectStreamClient } from "../libs/stream";
 import { sessionApi } from "../api/session";
 
 function useStreamClient(session, loadingSession, isHost, isParticipant) {
+  console.log(`p:${isParticipant}`)
+  console.log(`s:${session}`)
+  console.log(`h:${isHost}`)
+  console.log(`s:${loadingSession}`)
   const [streamClient, setStreamClient] = useState(null);
   const [call, setCall] = useState(null);
   const [chatClient, setChatClient] = useState(null);
