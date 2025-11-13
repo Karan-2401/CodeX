@@ -32,7 +32,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={!isSignedIn ? <HomePage /> :  <Navigate to={"/dashboard"} />} />
         <Route
           path="/problems"
           element={isSignedIn ? <Problem /> : <Navigate to={"/"} />}
